@@ -1,6 +1,7 @@
 -- define your colorscheme here
 --local colorscheme = 'monokai_pro'
-local colorscheme = 'monoglow'
+--local colorscheme = 'monoglow'
+local colorscheme = 'gruvbox'
 
 local is_ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
 if not is_ok then

@@ -27,6 +27,7 @@ vim.opt.fileencodings = { "utf-8", "latin1" } -- List of encodings to try when o
 
 -- Backup and Undo
 vim.opt.backup = true                 -- Enable backup files
+vim.opt.backupdir = "/tmp/nvim/backups//"  -- Store backup files in a specific directory
 vim.opt.undofile = true               -- Enable persistent undo
 vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir" -- Set the directory for undo files
 
