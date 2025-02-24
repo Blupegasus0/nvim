@@ -69,106 +69,127 @@ require("lazy").setup({
 		},
 
 		-- File Explorer
-        {
-            "nvim-tree/nvim-tree.lua",
-            version = "*",
-            lazy = false,
-            dependencies = {
-                "nvim-tree/nvim-web-devicons",
-            },
-            config = function()
-                require("config.nvim-tree")
-            end,
-        },
+		{
+			"nvim-tree/nvim-tree.lua",
+			version = "*",
+			lazy = false,
+			dependencies = {
+				"nvim-tree/nvim-web-devicons",
+			},
+			config = function()
+				require("config.nvim-tree")
+			end,
+		},
 
-        -- Terminal
-        {
-            "Dan7h3x/neaterm.nvim",
-            branch = "stable",
-            event = "VeryLazy",
-            opts = require("config.neaterm"),
-            dependencies = {
-                "nvim-lua/plenary.nvim",
-                "ibhagwan/fzf-lua",
-            },
-        },
+		-- Terminal
+		{
+			"Dan7h3x/neaterm.nvim",
+			branch = "stable",
+			event = "VeryLazy",
+			opts = require("config.neaterm"),
+			dependencies = {
+				"nvim-lua/plenary.nvim",
+				"ibhagwan/fzf-lua",
+			},
+		},
 
-        {
-            "nvim-treesitter/nvim-treesitter", 
-            build = ":TSUpdate",
-            config = function () 
-                require("config.treesitter")
-            end
-        },
+		{
+			"nvim-treesitter/nvim-treesitter", 
+			build = ":TSUpdate",
+			config = function () 
+				require("config.treesitter")
+			end
+		},
 
-        -- Status line
-        {
-            "NTBBloodbath/galaxyline.nvim",
-            -- your statusline
-            config = function()
-                require("galaxyline.themes.eviline")
-            end,
-            -- some optional icons
-            dependencies = { "kyazdani42/nvim-web-devicons", opt = true }
-        },
+		-- Status line
+		{
+			"NTBBloodbath/galaxyline.nvim",
+			-- your statusline
+			config = function()
+				require("galaxyline.themes.eviline")
+			end,
+			-- some optional icons
+			dependencies = { "kyazdani42/nvim-web-devicons", opt = true }
+		},
 
-        -- Tabs
-        {
-            'romgrk/barbar.nvim',
-            dependencies = {
-                'lewis6991/gitsigns.nvim', -- OPTIONAL: for git status
-                'nvim-tree/nvim-web-devicons', -- OPTIONAL: for file icons
-            },
-            init = function() 
-                vim.g.barbar_auto_setup = false 
-                require("config.barbar")
-            end,
-            opts = {
-                -- lazy.nvim will automatically call setup for you. put your options here, anything missing will use the default:
-                -- animation = true,
-                -- insert_at_start = true,
-                -- …etc.
-            },
-            version = '^1.0.0', -- optional: only update when a new 1.x version is released
-        },
+		-- Tabs
+		{
+			'romgrk/barbar.nvim',
+			dependencies = {
+				'lewis6991/gitsigns.nvim', -- OPTIONAL: for git status
+				'nvim-tree/nvim-web-devicons', -- OPTIONAL: for file icons
+			},
+			init = function() 
+				vim.g.barbar_auto_setup = false 
+				require("config.barbar")
+			end,
+			opts = {
+				-- lazy.nvim will automatically call setup for you. put your options here, anything missing will use the default:
+				-- animation = true,
+				-- insert_at_start = true,
+				-- …etc.
+			},
+			version = '^1.0.0', -- optional: only update when a new 1.x version is released
+		},
 
-        -- Git
-        {
-            'lewis6991/gitsigns.nvim',
-            version = "*",
-            lazy = false,
-            dependencies = {
-                'nvim-lua/plenary.nvim',
-            },
-            config = function()
-                require('gitsigns').setup {
-                    -- Other configuration options can go here
-                }
-            end,
-        },
+		-- Git
+		{
+			'lewis6991/gitsigns.nvim',
+			version = "*",
+			lazy = false,
+			dependencies = {
+				'nvim-lua/plenary.nvim',
+			},
+			config = function()
+				require('gitsigns').setup {
+					-- Other configuration options can go here
+				}
+			end,
+		},
 
-        -- Indentation guides
-        {
-            "lukas-reineke/indent-blankline.nvim",
-            main = "ibl",
-            ---@module "ibl"
-            ---@type ibl.config
-            opts = {},
-        },
+		-- Indentation guides
+		{
+			"lukas-reineke/indent-blankline.nvim",
+			main = "ibl",
+			---@module "ibl"
+			---@type ibl.config
+			opts = {},
+		},
 
-        -- Auto pair (brackets and such)
-        {
-            'windwp/nvim-autopairs',
-            event = "InsertEnter",
-            config = true
-            -- use opts = {} for passing setup options
-            -- this is equivalent to setup({}) function
-        }
+		-- Auto pair (brackets and such)
+		{
+			'windwp/nvim-autopairs',
+			event = "InsertEnter",
+			config = true
+			-- use opts = {} for passing setup options
+			-- this is equivalent to setup({}) function
+		},
 
-    },
-    -- Configure any other settings here. See the documentation for more details.
-    -- colorscheme that will be used when installing plugins.
-    install = { colorscheme = { "habamax" } },
-    -- automatically check for plugin updates
-    checker = { enabled = true },
+
+		----------------------
+		-- Language Support --
+		----------------------
+		{ 'rust-lang/rust.vim' },
+		{
+			'mrcjkb/rustaceanvim',
+			version = '^5', -- Recommended
+			lazy = false, -- This plugin is already lazy
+		},
+		{
+			'nvim-flutter/flutter-tools.nvim',
+			lazy = false,
+			dependencies = {
+				'nvim-lua/plenary.nvim',
+				'stevearc/dressing.nvim', -- optional for vim.ui.select
+			},
+			config = true,
+		},
+        { 'saadparwaiz1/cmp_luasnip' }
+
+	},
+	-- Configure any other settings here. See the documentation for more details.
+	-- colorscheme that will be used when installing plugins.
+	install = { colorscheme = { "habamax" } },
+	-- automatically check for plugin updates
+	checker = { enabled = true },
 })

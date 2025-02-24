@@ -5,3 +5,5 @@ require("keymaps")
 require("lsp")
 
 --require("config.lazy")
+require("config.completions")
+require("config.snips")
