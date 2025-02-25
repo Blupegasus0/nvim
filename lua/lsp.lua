@@ -10,17 +10,19 @@ require('mason').setup({
 
 require('mason-lspconfig').setup({
     -- A list of servers to automatically install if they're not already installed
-    ensure_installed = { 'lua_ls', 'rust_analyzer', 'html', 'ts_ls', 'inteliphense' },
+    ensure_installed = { 'lua_ls', --[['rust_analyzer,']] 'html', 'cssls', 'ts_ls', 'intelephense' },
 })
 
-
 local lspconfig = require('lspconfig')
+
+--[[
 lspconfig.rust_analyzer.setup {
   -- Server-specific settings. See `:help lspconfig-setup`
   settings = {
     ['rust-analyzer'] = {},
   },
 }
+]]
 
 -- PHP (Intelephense)
 lspconfig.intelephense.setup({
@@ -45,6 +47,13 @@ lspconfig.lua_ls.setup({
 
 -- HTML
 lspconfig.html.setup({
+    on_attach = function(client, bufnr)
+        -- Optional: Set up buffer-specific key mappings here
+    end,
+})
+
+-- CSS
+lspconfig.cssls.setup({
     on_attach = function(client, bufnr)
         -- Optional: Set up buffer-specific key mappings here
     end,

@@ -165,31 +165,40 @@ require("lazy").setup({
 			-- this is equivalent to setup({}) function
 		},
 
+        -- Theme switcher
+        {
+            "zaldih/themery.nvim",
+            lazy = false,
+            config = function()
+                require("config.themery")
+            end
+        },
 
-		----------------------
-		-- Language Support --
-		----------------------
-		{ 'rust-lang/rust.vim' },
-		{
-			'mrcjkb/rustaceanvim',
-			version = '^5', -- Recommended
-			lazy = false, -- This plugin is already lazy
-		},
-		{
-			'nvim-flutter/flutter-tools.nvim',
-			lazy = false,
-			dependencies = {
-				'nvim-lua/plenary.nvim',
-				'stevearc/dressing.nvim', -- optional for vim.ui.select
-			},
-			config = true,
-		},
+        ----------------------
+        -- Language Support --
+        ----------------------
+        { 'rust-lang/rust.vim' },
+        {
+            'mrcjkb/rustaceanvim',
+            version = '^5', -- Recommended
+            lazy = false, -- This plugin is already lazy
+        },
+        {
+            'nvim-flutter/flutter-tools.nvim',
+            lazy = false,
+            dependencies = {
+                'nvim-lua/plenary.nvim',
+                'stevearc/dressing.nvim', -- optional for vim.ui.select
+            },
+            config = true,
+        },
         { 'saadparwaiz1/cmp_luasnip' }
 
-	},
-	-- Configure any other settings here. See the documentation for more details.
-	-- colorscheme that will be used when installing plugins.
-	install = { colorscheme = { "habamax" } },
-	-- automatically check for plugin updates
-	checker = { enabled = true },
+
+    },
+    -- Configure any other settings here. See the documentation for more details.
+    -- colorscheme that will be used when installing plugins.
+    install = { colorscheme = { "habamax" } },
+    -- automatically check for plugin updates
+    checker = { enabled = true },
 })

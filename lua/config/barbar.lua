@@ -29,7 +29,7 @@ map('n', '<A-p>', '<Cmd>BufferPin<CR>', opts)
 --                 :BufferGotoUnpinned
 
 -- Close buffer
-map('n', '<A-c>', '<Cmd>BufferClose<CR>', opts)
+map('n', '<leader>x', '<Cmd>BufferClose<CR>', opts)
 
 -- Wipeout buffer
 --                 :BufferWipeout
