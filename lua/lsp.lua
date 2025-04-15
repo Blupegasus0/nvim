@@ -10,19 +10,19 @@ require('mason').setup({
 
 require('mason-lspconfig').setup({
     -- A list of servers to automatically install if they're not already installed
-    ensure_installed = { 'lua_ls', --[['rust_analyzer,']] 'html', 'cssls', 'ts_ls', 'intelephense' },
+    ensure_installed = { 'lua_ls', 'rust_analyzer', 'html', 'cssls', 'ts_ls', 'intelephense' },
 })
 
 local lspconfig = require('lspconfig')
 
---[[
+-- Rust
+-- binary installed with `rustup component add rust-analyzer`
 lspconfig.rust_analyzer.setup {
   -- Server-specific settings. See `:help lspconfig-setup`
   settings = {
     ['rust-analyzer'] = {},
   },
 }
-]]
 
 -- PHP (Intelephense)
 lspconfig.intelephense.setup({
