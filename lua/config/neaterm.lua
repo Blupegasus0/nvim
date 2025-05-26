@@ -67,9 +67,9 @@ return {
   -- Default keymaps
   use_default_keymaps = true,
   keymaps = {
-    toggle = '<A-t>',
+    toggle = '<leader>tt',
     new_vertical = '<leader>v',
-    new_horizontal = '<leader>v',
+    new_horizontal = '<leader>h',
     new_float = '<C-A-t>',
     close = '<A-d>',
     next = '<C-PageDown>',
