@@ -67,13 +67,14 @@ return {
   -- Default keymaps
   use_default_keymaps = true,
   keymaps = {
-    toggle = '<leader>tt',
+    --toggle = '<leader>tt',
+    toggle = '<C-t>',
     new_vertical = '<leader>v',
     new_horizontal = '<leader>h',
     new_float = '<C-A-t>',
     close = '<A-d>',
-    next = '<C-PageDown>',
-    prev = '<C-PageUp>',
+    next = '<leader>tn',
+    prev = '<leader>tp',
     move_up = '<C-A-Up>',
     move_down = '<C-A-Down>',
     move_left = '<C-A-Left>',
