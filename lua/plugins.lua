@@ -174,6 +174,14 @@ require("lazy").setup({
             end
         },
 
+        -- Nice VSCode-like comments
+        {
+            'numToStr/Comment.nvim',
+            config = function()
+                require('Comment').setup()
+            end
+        },
+
         ----------------------
         -- Language Support --
         ----------------------
@@ -192,7 +200,21 @@ require("lazy").setup({
             },
             config = true,
         },
-        { 'saadparwaiz1/cmp_luasnip' }
+        { 'saadparwaiz1/cmp_luasnip' },
+
+        -- Add null-ls for formatting
+        {
+            "jose-elias-alvarez/null-ls.nvim",
+            dependencies = { "mason.nvim" }, -- Ensure it depends on mason
+            config = function()
+                local null_ls = require("null-ls")
+                null_ls.setup({
+                    sources = {
+                        null_ls.builtins.formatting.prettier,
+                    },
+                })
+            end,
+        },
 
 
     },
@@ -202,3 +224,6 @@ require("lazy").setup({
     -- automatically check for plugin updates
     checker = { enabled = true },
 })
+
+-- Key mapping for prettier formatting
+vim.api.nvim_set_keymap('n', '<leader>p', ':lua vim.lsp.buf.format()<CR>', { noremap = true, silent = true })
