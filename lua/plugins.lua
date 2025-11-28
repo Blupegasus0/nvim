@@ -202,21 +202,6 @@ require("lazy").setup({
         },
         { 'saadparwaiz1/cmp_luasnip' },
 
-        -- Add null-ls for formatting
-        {
-            "jose-elias-alvarez/null-ls.nvim",
-            dependencies = { "mason.nvim" }, -- Ensure it depends on mason
-            config = function()
-                local null_ls = require("null-ls")
-                null_ls.setup({
-                    sources = {
-                        null_ls.builtins.formatting.prettier,
-                    },
-                })
-            end,
-        },
-
-
     },
     -- Configure any other settings here. See the documentation for more details.
     -- colorscheme that will be used when installing plugins.

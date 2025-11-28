@@ -14,20 +14,11 @@ require('mason-lspconfig').setup({
 })
 
 local lspconfig = require('lspconfig')
-local null_ls = require('null-ls')
 
 local on_attach = function(client, bufnr)
     -- Key mapping for formatting
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>p', '<cmd>lua vim.lsp.buf.format()<CR>', { noremap = true, silent = true })
 end
-
--- Setup null-ls for Prettier
-null_ls.setup({
-    sources = {
-        null_ls.builtins.formatting.prettier,
-    },
-    on_attach = on_attach, -- Ensure on_attach is called
-})
 
 -- Rust
 -- binary installed with `rustup component add rust-analyzer`
