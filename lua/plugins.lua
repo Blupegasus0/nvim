@@ -95,6 +95,7 @@ require("lazy").setup({
 
 		{
 			"nvim-treesitter/nvim-treesitter", 
+            branch = "master", -- old branch
 			build = ":TSUpdate",
 			config = function () 
 				require("config.treesitter")
