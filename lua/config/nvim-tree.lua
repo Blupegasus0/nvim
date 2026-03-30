@@ -6,6 +6,9 @@ vim.g.loaded_netrwPlugin = 1
 vim.opt.termguicolors = true
 
 require("nvim-tree").setup({
+  hijack_directories = {
+    enable = false,
+  },
   sort = {
     sorter = "case_sensitive",
   },
