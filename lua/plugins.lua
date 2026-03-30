@@ -68,6 +68,28 @@ require("lazy").setup({
 			end,
 		},
 
+		-- Welcome dashboard
+		{
+			'goolord/alpha-nvim',
+			dependencies = { 'nvim-tree/nvim-web-devicons' },
+			config = function()
+				local alpha = require('alpha')
+				local dashboard = require('alpha.themes.dashboard')
+				alpha.setup(dashboard.config)
+
+				vim.api.nvim_create_autocmd('VimEnter', {
+					callback = function(data)
+						local no_args = vim.fn.argc(-1) == 0
+						local is_dir = vim.fn.isdirectory(data.file) == 1
+						if no_args or is_dir then
+							if is_dir then vim.cmd.cd(data.file) end
+							require('alpha').start(false)
+						end
+					end
+				})
+			end
+		},
+
 		-- File Explorer
 		{
 			"nvim-tree/nvim-tree.lua",
