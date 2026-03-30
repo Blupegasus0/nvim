@@ -13,53 +13,39 @@ require('mason-lspconfig').setup({
     ensure_installed = { 'lua_ls', 'rust_analyzer', 'html', 'cssls', 'ts_ls', 'intelephense' },
 })
 
-local lspconfig = require('lspconfig')
-
-local on_attach = function(client, bufnr)
-    -- Key mapping for formatting
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>p', '<cmd>lua vim.lsp.buf.format()<CR>', { noremap = true, silent = true })
-end
-
 -- Rust
 -- binary installed with `rustup component add rust-analyzer`
-lspconfig.rust_analyzer.setup {
-  -- Server-specific settings. See `:help lspconfig-setup`
+vim.lsp.config('rust_analyzer', {
   settings = {
     ['rust-analyzer'] = {},
   },
-}
+})
 
 -- PHP (Intelephense)
-lspconfig.intelephense.setup({
-    on_attach = function(client, bufnr)
-        -- Your on_attach function here
-    end,
-})
+vim.lsp.config('intelephense', {})
 
--- JavaScript/TypeScript (tsserver)
-lspconfig.ts_ls.setup({
-    on_attach = function(client, bufnr)
-        -- Your on_attach function here
-    end,
-})
+-- JavaScript/TypeScript
+vim.lsp.config('ts_ls', {})
 
--- Lua 
-lspconfig.lua_ls.setup({
-    on_attach = function(client, bufnr)
-        -- Your on_attach function here
-    end,
+-- Lua
+vim.lsp.config('lua_ls', {
+    settings = {
+        Lua = {
+            runtime = { version = 'LuaJIT' },
+            workspace = {
+                checkThirdParty = false,
+                library = vim.api.nvim_get_runtime_file("", true),
+            },
+            diagnostics = { globals = { 'vim' } },
+            telemetry = { enable = false },
+        },
+    },
 })
 
 -- HTML
-lspconfig.html.setup({
-    on_attach = function(client, bufnr)
-        -- Optional: Set up buffer-specific key mappings here
-    end,
-})
+vim.lsp.config('html', {})
 
 -- CSS
-lspconfig.cssls.setup({
-    on_attach = function(client, bufnr)
-        -- Optional: Set up buffer-specific key mappings here
-    end,
-})
+vim.lsp.config('cssls', {})
+
+vim.lsp.enable({ 'rust_analyzer', 'intelephense', 'ts_ls', 'lua_ls', 'html', 'cssls' })
