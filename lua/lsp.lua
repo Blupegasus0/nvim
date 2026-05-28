@@ -10,7 +10,7 @@ require('mason').setup({
 
 require('mason-lspconfig').setup({
     -- A list of servers to automatically install if they're not already installed
-    ensure_installed = { 'lua_ls', 'rust_analyzer', 'html', 'cssls', 'ts_ls', 'phpactor' },
+    ensure_installed = { 'lua_ls', 'rust_analyzer', 'html', 'cssls', 'ts_ls', 'phpactor', 'pyright' },
 })
 
 -- Rust
@@ -45,10 +45,13 @@ vim.lsp.config('lua_ls', {
     },
 })
 
+-- Python
+vim.lsp.config('pyright', {})
+
 -- HTML
 vim.lsp.config('html', {})
 
 -- CSS
 vim.lsp.config('cssls', {})
 
-vim.lsp.enable({ 'rust_analyzer', 'phpactor', 'ts_ls', 'lua_ls', 'html', 'cssls' })
+vim.lsp.enable({ 'rust_analyzer', 'phpactor', 'pyright', 'ts_ls', 'lua_ls', 'html', 'cssls' })

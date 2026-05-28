@@ -76,6 +76,10 @@ require("lazy").setup({
 			config = function()
 				local alpha = require('alpha')
 				local dashboard = require('alpha.themes.dashboard')
+				-- Disable resize redraw: WinResized fires after buffer is wiped → crash
+				dashboard.config.opts = vim.tbl_extend('force', dashboard.config.opts or {}, {
+					redraw_on_resize = false,
+				})
 				alpha.setup(dashboard.config)
 
 				vim.api.nvim_create_autocmd('VimEnter', {
