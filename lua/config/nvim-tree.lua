@@ -17,6 +17,24 @@ require("nvim-tree").setup({
   },
   renderer = {
     group_empty = true,
+    root_folder_label = false,
+    icons = {
+      git_placement = "before",
+    },
+  },
+  git = {
+    enable = true,
+    ignore = false,
+  },
+  diagnostics = {
+    enable = true,
+    show_on_dirs = true,
+  },
+  actions = {
+    open_file = {
+      quit_on_open = false,
+      resize_window = true,
+    },
   },
   filters = {
     dotfiles = false,
