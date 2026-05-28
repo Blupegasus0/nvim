@@ -44,7 +44,20 @@ vim.opt.splitbelow = true             -- Split windows below
 vim.opt.splitright = true             -- Split windows to the right
 vim.opt.termguicolors = true          -- Enable 24-bit RGB colors
 
--- Set the clipboard to use the system clipboard
+-- Clipboard: OSC 52 over SSH (kitty/wezterm/alacritty), unnamedplus locally
+if vim.env.SSH_TTY ~= nil then
+    vim.g.clipboard = {
+        name = 'OSC 52',
+        copy = {
+            ['+'] = require('vim.ui.clipboard.osc52').copy('+'),
+            ['*'] = require('vim.ui.clipboard.osc52').copy('*'),
+        },
+        paste = {
+            ['+'] = require('vim.ui.clipboard.osc52').paste('+'),
+            ['*'] = require('vim.ui.clipboard.osc52').paste('*'),
+        },
+    }
+end
 vim.opt.clipboard = "unnamedplus"
 
 -- Enable folding
