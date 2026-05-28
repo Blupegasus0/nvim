@@ -10,7 +10,7 @@ require('mason').setup({
 
 require('mason-lspconfig').setup({
     -- A list of servers to automatically install if they're not already installed
-    ensure_installed = { 'lua_ls', 'rust_analyzer', 'html', 'cssls', 'ts_ls', 'intelephense' },
+    ensure_installed = { 'lua_ls', 'rust_analyzer', 'html', 'cssls', 'ts_ls', 'phpactor' },
 })
 
 -- Rust
@@ -21,8 +21,11 @@ vim.lsp.config('rust_analyzer', {
   },
 })
 
--- PHP (Intelephense)
-vim.lsp.config('intelephense', {})
+-- PHP (phpactor - pure PHP, no npm required)
+vim.lsp.config('phpactor', {
+    filetypes = { 'php' },
+    root_markers = { 'composer.json', '.git', '.phpactor.json', '.phpactor.yml' },
+})
 
 -- JavaScript/TypeScript
 vim.lsp.config('ts_ls', {})
@@ -48,4 +51,4 @@ vim.lsp.config('html', {})
 -- CSS
 vim.lsp.config('cssls', {})
 
-vim.lsp.enable({ 'rust_analyzer', 'intelephense', 'ts_ls', 'lua_ls', 'html', 'cssls' })
+vim.lsp.enable({ 'rust_analyzer', 'phpactor', 'ts_ls', 'lua_ls', 'html', 'cssls' })
