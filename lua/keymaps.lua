@@ -37,6 +37,40 @@ vim.api.nvim_create_autocmd('TermOpen', {
 })
 
 -----------------
+---   LSP     ---
+-----------------
+
+vim.api.nvim_create_autocmd('LspAttach', {
+    callback = function(ev)
+        local o = { noremap = true, silent = true, buffer = ev.buf }
+        vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename,             vim.tbl_extend('force', o, { desc = 'LSP rename' }))
+        vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action,        vim.tbl_extend('force', o, { desc = 'LSP code action' }))
+        vim.keymap.set('n', '<leader>d',  vim.diagnostic.open_float,      vim.tbl_extend('force', o, { desc = 'Diagnostic float' }))
+        vim.keymap.set('n', '<leader>q',  vim.diagnostic.setloclist,      vim.tbl_extend('force', o, { desc = 'Diagnostic list' }))
+        vim.keymap.set('n', 'gs',         vim.lsp.buf.signature_help,     vim.tbl_extend('force', o, { desc = 'Signature help' }))
+    end,
+})
+
+-- Diagnostic display: show source, limit width, virtual text on current line only
+vim.diagnostic.config({
+    virtual_text = {
+        severity = { min = vim.diagnostic.severity.WARN },
+        source = 'if_many',
+        prefix = '●',
+    },
+    signs = true,
+    underline = true,
+    update_in_insert = false,
+    severity_sort = true,
+    float = {
+        border = 'rounded',
+        source = true,
+        header = '',
+        prefix = '',
+    },
+})
+
+-----------------
 -- Visual mode --
 -----------------
 
