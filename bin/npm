@@ -1,0 +1,51 @@
+#!/usr/bin/env sh
+# Mason npm→bun shim. Handles the exact call patterns Mason uses.
+# Placed in nvim config bin/ and prepended to PATH when bun is available.
+
+case "$1" in
+    version)
+        # Mason checks npm version to pick install flags (>=9 uses install-strategy=shallow)
+        printf '{"npm":"9.8.1","node":"20.11.0"}\n'
+        ;;
+    init)
+        # Mason runs: npm init --yes --scope=mason
+        # Creates a minimal package.json so bun add works in the install dir
+        printf '{"name":"mason","version":"1.0.0","private":true}\n' > package.json
+        ;;
+    install)
+        shift
+        exec bun add "$@"
+        ;;
+    uninstall)
+        shift
+        exec bun remove "$@"
+        ;;
+    view)
+        # Mason calls:
+        #   npm view --json <pkg>@latest          -> {"name":"..","version":".."}
+        #   npm view --json <pkg> versions        -> ["1.0.0","1.0.1",...]
+        pkg=""
+        field=""
+        for arg in "$@"; do
+            case "$arg" in
+                --json|view) ;;
+                versions)    field="versions" ;;
+                *@latest)    pkg="${arg%@latest}" ;;
+                *@*)         pkg="${arg%@*}" ;;
+                *)           [ -z "$pkg" ] && pkg="$arg" ;;
+            esac
+        done
+        if [ "$field" = "versions" ]; then
+            curl -sf "https://registry.npmjs.org/${pkg}" \
+                | python3 -c "import json,sys; d=json.load(sys.stdin); print(json.dumps(list(d.get('versions',{}).keys())))" 2>/dev/null \
+                || printf '[]\n'
+        else
+            curl -sf "https://registry.npmjs.org/${pkg}/latest" \
+                | python3 -c "import json,sys; d=json.load(sys.stdin); print(json.dumps({'name':d['name'],'version':d['version']}))" 2>/dev/null \
+                || printf '{}\n'
+        fi
+        ;;
+    *)
+        exec bun "$@"
+        ;;
+esac

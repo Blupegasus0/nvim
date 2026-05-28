@@ -1,3 +1,8 @@
+-- On servers with bun but broken/missing npm, use the shim in nvim config bin/
+if vim.fn.executable('bun') == 1 then
+    vim.env.PATH = vim.fn.stdpath('config') .. '/bin:' .. vim.env.PATH
+end
+
 require('mason').setup({
     ui = {
         icons = {
