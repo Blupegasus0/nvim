@@ -69,7 +69,7 @@ vim.g.mapleader = " "                  -- Set leader key to space
 
 -- Suppress "Press ENTER to continue" prompts
 vim.opt.cmdheight = 1
-vim.opt.shortmess:append("sAIcCqFSOWat")
+vim.opt.shortmess:append("sAIcCqFOWat")
 vim.opt.more = false
 
 -- Additional settings can be added here
