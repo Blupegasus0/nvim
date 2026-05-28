@@ -1,4 +1,9 @@
--- On servers with bun but broken/missing npm, use the shim in nvim config bin/
+-- Ensure bun is in PATH (commonly installed to ~/.bun/bin but not in SSH PATH)
+local bun_bin = vim.fn.expand('~/.bun/bin')
+if vim.fn.isdirectory(bun_bin) == 1 and not vim.env.PATH:find(bun_bin, 1, true) then
+    vim.env.PATH = bun_bin .. ':' .. vim.env.PATH
+end
+-- When bun is available, use the npm→bun shim in nvim config bin/
 if vim.fn.executable('bun') == 1 then
     vim.env.PATH = vim.fn.stdpath('config') .. '/bin:' .. vim.env.PATH
 end
@@ -15,7 +20,7 @@ require('mason').setup({
 
 require('mason-lspconfig').setup({
     -- A list of servers to automatically install if they're not already installed
-    ensure_installed = { 'lua_ls', 'rust_analyzer', 'html', 'cssls', 'ts_ls', 'phpactor', 'pyright' },
+    ensure_installed = { 'lua_ls', 'rust_analyzer', 'html', 'cssls', 'ts_ls', 'phpactor', 'pyright', 'marksman', 'yamlls' },
 })
 
 -- Rust
@@ -53,10 +58,24 @@ vim.lsp.config('lua_ls', {
 -- Python
 vim.lsp.config('pyright', {})
 
+-- Markdown (binary install, no npm)
+vim.lsp.config('marksman', {})
+
+-- YAML
+local ok_store, schemastore = pcall(require, 'schemastore')
+vim.lsp.config('yamlls', {
+    settings = {
+        yaml = {
+            schemas = ok_store and schemastore.yaml.schemas() or {},
+            validate = true,
+        },
+    },
+})
+
 -- HTML
 vim.lsp.config('html', {})
 
 -- CSS
 vim.lsp.config('cssls', {})
 
-vim.lsp.enable({ 'rust_analyzer', 'phpactor', 'pyright', 'ts_ls', 'lua_ls', 'html', 'cssls' })
+vim.lsp.enable({ 'rust_analyzer', 'phpactor', 'pyright', 'ts_ls', 'lua_ls', 'html', 'cssls', 'marksman', 'yamlls' })

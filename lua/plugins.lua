@@ -213,6 +213,9 @@ require("lazy").setup({
         ----------------------
         -- Language Support --
         ----------------------
+        -- Schema store for YAML/JSON LSP validation
+        { 'b0o/schemastore.nvim', lazy = false },
+
         { 'rust-lang/rust.vim' },
         {
             'mrcjkb/rustaceanvim',
