@@ -68,8 +68,9 @@ vim.opt.foldlevel = 99                 -- Open all folds by default
 vim.g.mapleader = " "                  -- Set leader key to space
 
 -- Suppress "Press ENTER to continue" prompts
-vim.opt.cmdheight = 1                 -- Enough height to show most messages without overflow
-vim.opt.shortmess:append("c")        -- Don't show completion messages that trigger hit-enter
+vim.opt.cmdheight = 1
+vim.opt.shortmess:append("sAIcCqFSOWat")
+vim.opt.more = false
 
 -- Additional settings can be added here
 
