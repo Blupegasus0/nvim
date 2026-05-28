@@ -57,6 +57,7 @@ require("lazy").setup({
 		{
 			"L3MON4D3/LuaSnip",
 			version = "v2.*",
+			dependencies = { "rafamadriz/friendly-snippets" },
 		},
 
 		-- Fuzzy finder (file search)
@@ -75,6 +76,10 @@ require("lazy").setup({
 			config = function()
 				local alpha = require('alpha')
 				local dashboard = require('alpha.themes.dashboard')
+				-- Disable resize redraw: WinResized fires after buffer is wiped → crash
+				dashboard.config.opts = vim.tbl_extend('force', dashboard.config.opts or {}, {
+					redraw_on_resize = false,
+				})
 				alpha.setup(dashboard.config)
 
 				vim.api.nvim_create_autocmd('VimEnter', {
@@ -208,6 +213,9 @@ require("lazy").setup({
         ----------------------
         -- Language Support --
         ----------------------
+        -- Schema store for YAML/JSON LSP validation
+        { 'b0o/schemastore.nvim', lazy = false },
+
         { 'rust-lang/rust.vim' },
         {
             'mrcjkb/rustaceanvim',
