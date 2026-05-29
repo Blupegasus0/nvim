@@ -34,7 +34,12 @@ vim.lsp.config('rust_analyzer', {
 -- PHP
 vim.lsp.config('intelephense', {
     filetypes = { 'php' },
-    root_markers = { 'composer.json', '.git' },
+    root_dir = function(bufnr, on_dir)
+        local fname = vim.api.nvim_buf_get_name(bufnr)
+        local root = vim.fs.root(bufnr, { 'composer.json', '.git', '.svn' })
+            or vim.fn.fnamemodify(fname, ':h')
+        on_dir(root)
+    end,
 })
 
 -- JavaScript/TypeScript
