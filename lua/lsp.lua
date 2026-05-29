@@ -35,6 +35,7 @@ vim.lsp.config('rust_analyzer', {
 vim.lsp.config('intelephense', {
     cmd = { 'intelephense', '--stdio' },
     filetypes = { 'php' },
+    root_markers = {},
     root_dir = function(bufnr, on_dir)
         local root = vim.fs.root(bufnr, { 'composer.json', '.git', '.svn' })
             or vim.fn.getcwd()
