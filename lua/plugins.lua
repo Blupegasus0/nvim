@@ -210,16 +210,6 @@ require("lazy").setup({
             end
         },
 
-        -- Tmux nav
-        {
-            "christoomey/vim-tmux-navigator",
-            config = function()
-                -- Optional: keeps it from installing helper scripts (often avoids conflicts)
-                vim.g.tmux_navigator_no_script = 1
-            end,
-        },
-
-
         ----------------------
         -- Language Support --
         ----------------------
